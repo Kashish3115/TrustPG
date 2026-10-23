@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TrustPG | Bengaluru Student PG Discovery & Transparent Pricing</title>
+  <meta name="description" content="Find your stay. Know what you pay. Transparent rent breakdowns, resident reviews, and optional on-site verified PGs across Bengaluru.">
+  
+  <!-- Plus Jakarta Sans Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#ECFDF5',
+              100: '#D1FAE5',
+              500: '#10B981',
+              600: '#059669',
+              700: '#047857',
+              800: '#065F46',
+              900: '#064E3B',
+            },
+            navy: {
+              800: '#1E293B',
+              900: '#0F172A',
+            },
+            amber: {
+              500: '#F59E0B',
+              600: '#D97706',
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body class="flex flex-col min-h-screen antialiased bg-[#FBFBF9] text-slate-900">
+
+  <!-- ========================================== -->
+  <!-- TOP ANNOUNCEMENT BAR                       -->
+  <!-- ========================================== -->
+  <div class="bg-emerald-900 text-emerald-100 text-xs py-2 px-4 text-center font-medium flex items-center justify-center gap-2">
+    <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+    <span>Bengaluru Student Edition &mdash; No Hidden Brokerage &bull; Transparent Cost Breakdowns</span>
+    <span class="hidden md:inline text-emerald-300">|</span>
+    <button onclick="TrustPG.openQuickLoginModal()" class="hidden md:inline underline hover:text-white font-semibold ml-1">
+      ⚡ 1-Click Demo Login
+    </button>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- NAVIGATION BAR                             -->
+  <!-- ========================================== -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <a href="#/" class="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-emerald-500 rounded-lg p-1">
+        <!-- SVG Shield + House Logo -->
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-600 to-teal-700 flex items-center justify-center shadow-md text-white group-hover:scale-105 transition-transform">
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="m9 12 2 2 4-4"/>
+          </svg>
+        </div>
+        <div class="flex flex-col">
+          <span class="text-2xl font-extrabold tracking-tight text-slate-900">
+            Trust<span class="text-emerald-600">PG</span>
+          </span>
+          <span class="text-[10px] font-semibold text-slate-500 tracking-wider uppercase -mt-1">
+            Bengaluru Stays
+          </span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="hidden lg:flex items-center gap-8 text-sm font-semibold text-slate-700">
+        <a href="#/" class="hover:text-emerald-600 transition-colors">Home</a>
+        <a href="#/find" class="hover:text-emerald-600 transition-colors">Find a PG</a>
+        <a href="#/compare" class="hover:text-emerald-600 transition-colors flex items-center gap-1.5">
+          <span>Compare PGs</span>
+          <span id="compare-badge" class="hidden px-1.5 py-0.5 text-[11px] bg-emerald-100 text-emerald-800 rounded-full font-bold">0</span>
+        </a>
+        <a href="#/how-it-works" class="hover:text-emerald-600 transition-colors">How It Works</a>
+        <a href="#/verification" class="hover:text-emerald-600 transition-colors flex items-center gap-1">
+          <svg class="w-4 h-4 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+          </svg>
+          <span>How Verification Works</span>
+        </a>
+        <a href="#/list-pg" class="text-slate-600 hover:text-emerald-600 transition-colors">List Your PG</a>
+      </nav>
+
+      <!-- User Auth Actions -->
+      <div class="hidden sm:flex items-center gap-4">
+        <div id="nav-auth-container" class="flex items-center gap-3">
+          <!-- Dynamically populated by app.js: Login/Register buttons or User Profile Dropdown -->
+        </div>
+
+        <a href="#/find" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-sm hover:shadow transition-all flex items-center gap-2">
+          <i data-lucide="search" class="w-4 h-4"></i>
+          <span>Find My PG</span>
+        </a>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button id="mobile-menu-btn" onclick="TrustPG.toggleMobileMenu()" class="lg:hidden p-2 rounded-lg text-slate-700 hover:bg-slate-100 focus:outline-none" aria-label="Toggle mobile menu">
+        <i data-lucide="menu" class="w-6 h-6"></i>
+      </button>
+
+    </div>
+
+    <!-- Mobile Drawer Navigation -->
+    <div id="mobile-drawer" class="hidden lg:hidden border-t border-slate-200 bg-white px-4 pt-3 pb-6 space-y-3">
+      <a href="#/" onclick="TrustPG.toggleMobileMenu()" class="block py-2 text-base font-semibold text-slate-800">Home</a>
+      <a href="#/find" onclick="TrustPG.toggleMobileMenu()" class="block py-2 text-base font-semibold text-slate-800">Find a PG</a>
+      <a href="#/compare" onclick="TrustPG.toggleMobileMenu()" class="block py-2 text-base font-semibold text-slate-800">Compare PGs</a>
+      <a href="#/how-it-works" onclick="TrustPG.toggleMobileMenu()" class="block py-2 text-base font-semibold text-slate-800">How It Works</a>
+      <a href="#/verification" onclick="TrustPG.toggleMobileMenu()" class="block py-2 text-base font-semibold text-slate-800">How Verification Works</a>
+      <a href="#/list-pg" onclick="TrustPG.toggleMobileMenu()" class="block py-2 text-base font-semibold text-slate-800">List Your PG</a>
+      <div id="mobile-auth-container" class="pt-3 border-t border-slate-100 flex flex-col gap-2"></div>
+    </div>
+  </header>
+
+  <!-- ========================================== -->
+  <!-- MAIN APPLICATION VIEW CONTAINER            -->
+  <!-- ========================================== -->
+  <main id="view-container" class="flex-grow">
+    <!-- Rendered dynamically by app.js according to route -->
+    <div class="flex items-center justify-center min-h-[500px]">
+      <div class="w-10 h-10 border-4 border-emerald-600 border-t-transparent rounded-full animate-spin"></div>
+    </div>
+  </main>
+
+  <!-- ========================================== -->
+  <!-- FOOTER                                     -->
+  <!-- ========================================== -->
+  <footer class="bg-slate-900 text-slate-300 pt-16 pb-12 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-12">
+        
+        <!-- Brand Info -->
+        <div class="lg:col-span-2 space-y-4">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-xl bg-emerald-600 flex items-center justify-center text-white">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                <path d="m9 12 2 2 4-4"/>
+              </svg>
+            </div>
+            <span class="text-2xl font-extrabold text-white">
+              Trust<span class="text-emerald-400">PG</span>
+            </span>
+          </div>
+          <p class="text-sm text-slate-400 max-w-sm leading-relaxed">
+            Bengaluru's student-first accommodation discovery platform. Find your stay, know what you pay, and never get surprised by hidden costs or unverified claims.
+          </p>
+          <div class="flex items-center gap-3 pt-2">
+            <span class="px-2.5 py-1 rounded-md bg-emerald-950 text-emerald-400 border border-emerald-800 text-xs font-semibold">
+              Bengaluru Initial Market
+            </span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 text-xs font-semibold">
+              Currency: INR (₹)
+            </span>
+          </div>
+        </div>
+
+        <!-- Bengaluru Localities -->
+        <div>
+          <h4 class="text-white font-bold text-sm tracking-wider uppercase mb-4">Bengaluru Localities</h4>
+          <ul class="space-y-2.5 text-sm text-slate-400">
+            <li><a href="#/find?locality=Koramangala" class="hover:text-emerald-400 transition-colors">Koramangala</a></li>
+            <li><a href="#/find?locality=BTM+Layout" class="hover:text-emerald-400 transition-colors">BTM Layout</a></li>
+            <li><a href="#/find?locality=HSR+Layout" class="hover:text-emerald-400 transition-colors">HSR Layout</a></li>
+            <li><a href="#/find?locality=Electronic+City" class="hover:text-emerald-400 transition-colors">Electronic City</a></li>
+            <li><a href="#/find?locality=Whitefield" class="hover:text-emerald-400 transition-colors">Whitefield</a></li>
+            <li><a href="#/find?locality=Marathahalli" class="hover:text-emerald-400 transition-colors">Marathahalli</a></li>
+            <li><a href="#/find?locality=Indiranagar" class="hover:text-emerald-400 transition-colors">Indiranagar</a></li>
+            <li><a href="#/find?locality=Jayanagar" class="hover:text-emerald-400 transition-colors">Jayanagar</a></li>
+          </ul>
+        </div>
+
+        <!-- Platform & Verification -->
+        <div>
+          <h4 class="text-white font-bold text-sm tracking-wider uppercase mb-4">Trust & Verification</h4>
+          <ul class="space-y-2.5 text-sm text-slate-400">
+            <li><a href="#/verification" class="hover:text-emerald-400 transition-colors">How Verification Works</a></li>
+            <li><a href="#/how-it-works" class="hover:text-emerald-400 transition-colors">How It Works</a></li>
+            <li><a href="#/compare" class="hover:text-emerald-400 transition-colors">Compare PGs</a></li>
+            <li><a href="#/list-pg" class="hover:text-emerald-400 transition-colors">List Your PG</a></li>
+            <li><a href="#/faq" class="hover:text-emerald-400 transition-colors">FAQ & Support</a></li>
+            <li><a href="#/about" class="hover:text-emerald-400 transition-colors">About TrustPG</a></li>
+          </ul>
+        </div>
+
+        <!-- Legal & Governance -->
+        <div>
+          <h4 class="text-white font-bold text-sm tracking-wider uppercase mb-4">Policies & Safety</h4>
+          <ul class="space-y-2.5 text-sm text-slate-400">
+            <li><a href="#/privacy" class="hover:text-emerald-400 transition-colors">Privacy Policy</a></li>
+            <li><a href="#/terms" class="hover:text-emerald-400 transition-colors">Terms & Conditions</a></li>
+            <li><a href="#/terms#review-policy" class="hover:text-emerald-400 transition-colors">Review Integrity Policy</a></li>
+            <li><a href="#/terms#refund-policy" class="hover:text-emerald-400 transition-colors">Inspection Refund Policy</a></li>
+            <li><a href="#/contact" class="hover:text-emerald-400 transition-colors">Contact Us</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Mandatory Legal & Inspection Scope Disclaimer (Section 20) -->
+      <div class="pt-8 border-t border-slate-800 text-xs text-slate-400 space-y-3 leading-relaxed">
+        <p class="font-medium text-slate-300">
+          <strong class="text-emerald-400">Important Advisory & Disclaimer:</strong> TrustPG provides accommodation information to help users compare options. Property details, prices, and availability may change. Verification applies only to the stated inspection scope and date. Users should independently confirm costs, terms, and property conditions before making payments.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 text-slate-500 text-xs">
+          <p>&copy; 2026 TrustPG Technologies Pvt. Ltd. All rights reserved. Made for college students in Bengaluru.</p>
+          <div class="flex items-center gap-4">
+            <button onclick="TrustPG.openQuickLoginModal()" class="text-emerald-400 hover:underline">
+              Demo Presets
+            </button>
+            <span>&bull;</span>
+            <a href="#/about" class="hover:text-slate-300">Bengaluru, KA</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ========================================== -->
+  <!-- MODAL CONTAINER (Dynamic)                  -->
+  <!-- ========================================== -->
+  <div id="modal-container" class="hidden"></div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" aria-live="polite"></div>
+
+  <!-- Core Frontend Application Logic -->
+  <script src="/app.js"></script>
+</body>
+</html>
