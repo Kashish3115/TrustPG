@@ -1,0 +1,23 @@
+{
+  "name": "trustpg",
+  "version": "1.0.0",
+  "description": "Student-first PG discovery and verification web platform for Bengaluru",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "seed": "node seed.js",
+    "test": "node test.js"
+  },
+  "keywords": [
+    "pg",
+    "accommodation",
+    "bengaluru",
+    "students",
+    "discovery"
+  ],
+  "author": "TrustPG Team",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.0.0"
+  }
+}
